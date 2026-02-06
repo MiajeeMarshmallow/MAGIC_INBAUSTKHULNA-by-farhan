@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAUST Cover Page Final</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="editor-container">
+    <h3 style="text-align: center; color: #006400; margin-top: 0;">Cover Page Settings</h3>
+    <div class="input-grid">
+        <div class="full-width">
+            <label>1. Upload BAUST Logo:</label>
+            <input type="file" id="logoInput" accept="image/*">
+        </div>
+        <div class="full-width">
+            <label>Header Department Name:</label>
+            <select id="inDept" onchange="update()">
+                <option value="Department of Computer Science & Engineering">CSE</option>
+                <option value="Department of Electrical & Electronic Engineering">EEE</option>
+                <option value="Department of Civil Engineering">CE</option>
+                <option value="Department of Mechanical Engineering">ME</option>
+         
+                <option value="Department of Business Administration">BBA</option>
+                <option value="Department of English">English</option>
+            </select>
+        </div>
+        <div class="full-width">
+            <label>Report Type:</label>
+            <select id="reportType" onchange="handleTypeChange()">
+                <option value="ASSIGNMENT">ASSIGNMENT</option>
+                <option value="LAB REPORT">LAB REPORT</option>
+                <option value="PROJECT REPORT">PROJECT REPORT</option>
+            </select>
+        </div>
+        <input type="text" id="inCName" placeholder="Course Name" oninput="update()">
+        <input type="text" id="inCCode" placeholder="Course Code" oninput="update()">
+        <input type="text" id="inANo" placeholder="Number (e.g. 01)" oninput="update()">
+        <input type="text" id="inAName" placeholder="Topic Name" oninput="update()">
+        <input type="text" id="inDate1" placeholder="Date of Assignment" oninput="update()">
+        <input type="text" id="inDate2" placeholder="Date of Submission" oninput="update()">
+        
+        <div class="submitted-box">
+            <label>Submitted By:</label>
+            <input type="text" id="inSN" placeholder="Name" oninput="update()">
+            <input type="text" id="inSI" placeholder="ID" oninput="update()">
+            <select id="inSD" onchange="update()">
+                <option value="CSE">CSE</option><option value="EEE">EEE</option>
+                <option value="CE">CE</option><option value="ME">ME</option>
+               <option value="BBA">BBA</option>
+            </select>
+        </div>
+        <div class="submitted-box">
+            <label>Submitted To:</label>
+            <input type="text" id="inTN" placeholder="Teacher Name" oninput="update()">
+            <select id="inTDes" onchange="update()">
+                <option value="Lecturer">Lecturer</option>
+                <option value="Assistant Professor">Assistant Professor</option>
+                <option value="Associate Professor">Associate Professor</option>
+                <option value="Professor">Professor</option><option value="Department of Business Administration">BBA</option>
+                <option value="Department of English">English</option>
+            </select>
+            <select id="inTD" onchange="update()">
+                <option value="CSE">CSE</option><option value="EEE">EEE</option>
+                <option value="CE">CE</option><option value="ME">ME</option>
+                
+            </select>
+        </div>
+    </div>
+    <button onclick="downloadPDF()">Generate Final PDF</button>
+</div>
+
+<div id="cover-page">
+    <div class="header">
+        <div class="logo-box">
+            <img id="preview-logo" src="" alt="Please Upload Logo" style="display:none;">
+        </div>
+        <div class="uni-name">Bangladesh Army University of Science and Technology, Khulna</div>
+        <div class="dept-name-header" id="outDept">Department of Computer Science & Engineering</div>
+    </div>
+
+    <div class="report-title-container">
+        <div class="report-title" id="outType">ASSIGNMENT</div>
+    </div>
+
+    <div class="info-section">
+        <div class="info-row"><div class="label-cell">Course Name</div><div class="dots-cell">:</div><div class="value-cell" id="outCName"></div></div>
+        <div class="info-row"><div class="label-cell">Course Code</div><div class="dots-cell">:</div><div class="value-cell" id="outCCode"></div></div>
+        <div class="info-row"><div class="label-cell" id="labelNo">Assignment no.</div><div class="dots-cell">:</div><div class="value-cell" id="outANo"></div></div>
+        <div class="info-row"><div class="label-cell" id="labelTopic">Topic Name</div><div class="dots-cell">:</div><div class="value-cell" id="outAName"></div></div>
+        <div style="height: 5mm;"></div>
+        <div class="info-row"><div class="label-cell" id="labelDate1">Date of Assignment</div><div class="dots-cell">:</div><div class="value-cell" id="outDate1"></div></div>
+        <div class="info-row"><div class="label-cell">Date of Submission</div><div class="dots-cell">:</div><div class="value-cell" id="outDate2"></div></div>
+    </div>
+
+    <div class="footer-area">
+        <div class="footer-labels"><span>Submitted By</span><span>Submitted To</span></div>
+        <div class="footer-table">
+            <div class="footer-col left-border">
+                Name: <span id="outSN"></span><br>
+                ID: <span id="outSI"></span><br>
+                Department of: <span id="outSD"></span>
+            </div>
+            <div class="footer-col">
+                Name: <span id="outTN"></span><br>
+                Designation: <span id="outTDes"></span><br>
+                Department of: <span id="outTD"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
